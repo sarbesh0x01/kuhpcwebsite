@@ -1,8 +1,33 @@
+"use client";
+
 import Image from 'next/image';
 import { teamMembers } from '@/lib/data';
 import { FiMail, FiLink, FiLinkedin, FiGithub } from 'react-icons/fi';
 
 export default function Team() {
+  // Function to safely build links
+  const buildLink = (url, type) => {
+    if (!url) return "#";
+
+    if (type === 'email') {
+      return `mailto:${url}`;
+    } else if (type === 'github') {
+      return url.startsWith('http') ? url : `https://github.com/${url}`;
+    } else if (type === 'linkedin') {
+      return url.startsWith('http') ? url : `https://linkedin.com/in/${url}`;
+    } else {
+      return url.startsWith('http') ? url : `https://${url}`;
+    }
+  };
+
+  // Utility function to get proper image path with fallback
+  const getImagePath = (imagePath) => {
+    if (!imagePath) return '/placeholder-profile.jpg';
+
+    // Return the path since we're now using the public directory
+    return imagePath;
+  };
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -17,68 +42,165 @@ export default function Team() {
         </div>
       </div>
 
-      {/* Featured Team Member */}
+      {/* Project Supervisors Section */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-8 gradient-text">Project Supervisors</h2>
+          <p className="text-center text-muted-foreground mb-16 max-w-3xl mx-auto">
+            Leadership guiding our high-performance computing infrastructure development
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {teamMembers.supervisors.map((supervisor) => (
+              <div key={supervisor.id} className="flex flex-col items-center md:items-start gap-12">
+                <div className="w-full max-w-md mx-auto">
+                  <div className="relative h-[400px] w-full modern-card overflow-hidden">
+                    <Image
+                      src={getImagePath(supervisor.image)}
+                      alt={supervisor.name}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                      <div className="p-6">
+                        <span className="text-white/70">{supervisor.role}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full max-w-md mx-auto">
+                  <h2 className="text-3xl font-bold mb-2">{supervisor.name}</h2>
+                  <p className="text-primary font-medium mb-4">{supervisor.position}</p>
+                  <p className="text-foreground/90 mb-6">
+                    {supervisor.description}
+                  </p>
+                  <div className="flex space-x-4">
+                    {supervisor.email && (
+                      <a
+                        href={buildLink(supervisor.email, 'email')}
+                        className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <FiMail size={20} />
+                      </a>
+                    )}
+                    {supervisor.linkedin && (
+                      <a
+                        href={buildLink(supervisor.linkedin, 'linkedin')}
+                        className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <FiLinkedin size={20} />
+                      </a>
+                    )}
+                    {supervisor.github && (
+                      <a
+                        href={buildLink(supervisor.github, 'github')}
+                        className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <FiGithub size={20} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Technical Overseer Section */}
       <section className="py-20 relative">
         <div className="tech-dots absolute inset-0 -z-0"></div>
         <div className="container mx-auto px-4 relative">
-          <div className="flex flex-col md:flex-row items-center gap-12">
+          <h2 className="text-4xl font-bold text-center mb-8 gradient-text">Technical Overseer</h2>
+          <p className="text-center text-muted-foreground mb-16 max-w-3xl mx-auto">
+            Coordinating technical operations and implementation of our HPC resources
+          </p>
+
+          <div className="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
             <div className="md:w-1/2">
               <div className="relative h-[400px] w-full modern-card overflow-hidden">
                 <Image
-                  src="/images/team-placeholder.jpg"
-                  alt="Rajendra Adhikari"
+                  src={getImagePath(teamMembers.overseer.image)}
+                  alt={teamMembers.overseer.name}
                   fill
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
                   <div className="p-6">
-                    <span className="text-white/70">Project Leader</span>
+                    <span className="text-white/70">{teamMembers.overseer.role}</span>
                   </div>
                 </div>
               </div>
             </div>
             <div className="md:w-1/2">
-              <h2 className="text-3xl font-bold mb-2">Rajendra Adhikari</h2>
-              <p className="text-primary font-medium mb-4">Assistant Professor, Department of Physics</p>
+              <h2 className="text-3xl font-bold mb-2">{teamMembers.overseer.name}</h2>
+              <p className="text-primary font-medium mb-4">{teamMembers.overseer.position}</p>
               <p className="text-foreground/90 mb-6">
-                Leading the HPC initiative at Kathmandu University and coordinator of the Supercomputer Center.
-                Dr. Adhikari has been instrumental in establishing the partnership with CERN and developing the
-                high-performance computing infrastructure at Kathmandu University.
-              </p>
-              <p className="text-foreground/90 mb-6">
-                His vision and leadership have been key to the success of the HPC center, and he continues to
-                drive innovation and research excellence through computational resources.
+                {teamMembers.overseer.description}
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors">
-                  <FiMail size={20} />
-                </a>
-                <a href="#" className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors">
-                  <FiLinkedin size={20} />
-                </a>
-                <a href="#" className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors">
-                  <FiLink size={20} />
-                </a>
+                {teamMembers.overseer.email && (
+                  <a
+                    href={buildLink(teamMembers.overseer.email, 'email')}
+                    className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <FiMail size={20} />
+                  </a>
+                )}
+                {teamMembers.overseer.linkedin && (
+                  <a
+                    href={buildLink(teamMembers.overseer.linkedin, 'linkedin')}
+                    className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <FiLinkedin size={20} />
+                  </a>
+                )}
+                {teamMembers.overseer.github && (
+                  <a
+                    href={buildLink(teamMembers.overseer.github, 'github')}
+                    className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <FiGithub size={20} />
+                  </a>
+                )}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Team Members */}
+      {/* Technical Team Members */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-8 gradient-text">Core Team</h2>
+          <h2 className="text-4xl font-bold text-center mb-8 gradient-text">Technical Team</h2>
           <p className="text-center text-muted-foreground mb-16 max-w-3xl mx-auto">
-            The experts behind our high-performance computing infrastructure
+            The experts managing our high-performance computing infrastructure
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {teamMembers.slice(1).map((member) => (
-              <div key={member.id} className="modern-card bg-card overflow-hidden">
+            {teamMembers.members.map((member) => (
+              <div key={member.id} className="modern-card bg-card overflow-hidden relative">
                 <div className="relative h-64 w-full">
                   <Image
-                    src="/images/team-placeholder.jpg"
+                    src={getImagePath(member.image)}
                     alt={member.name}
                     fill
                     className="object-cover"
@@ -89,67 +211,23 @@ export default function Team() {
                   <h3 className="text-xl font-bold mb-1">{member.name}</h3>
                   <p className="text-primary font-medium mb-4">{member.position}</p>
                   <p className="text-foreground/80 mb-6">{member.description}</p>
-                  <div className="flex space-x-3">
-                    <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                      <FiMail size={18} />
-                    </a>
-                    <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                      <FiLinkedin size={18} />
-                    </a>
-                    <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                      <FiGithub size={18} />
-                    </a>
+
+                  <div className="flex space-x-4 z-10 relative">
+                    {member.github && (
+                      <a
+                        href={buildLink(member.github, 'github')}
+                        className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <FiGithub size={18} />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Administrative Team */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-8 gradient-text">Advisory Committee</h2>
-          <p className="text-center text-muted-foreground mb-16 max-w-3xl mx-auto">
-            Leadership guiding our high-performance computing initiatives
-          </p>
-
-          <div className="modern-card bg-card p-8 rounded-xl max-w-4xl mx-auto">
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold mb-4">Committee Structure</h3>
-              <div className="bg-muted p-6 rounded-lg mb-4">
-                <div className="font-semibold mb-2">Chair:</div>
-                <p>Vice Chancellor of Kathmandu University</p>
-              </div>
-              <div className="bg-muted p-6 rounded-lg">
-                <div className="font-semibold mb-2">Members:</div>
-                <ul className="space-y-2">
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>Representatives appointed by each member institution</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>Head of member institutions</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>Internationally renowned experts in supercomputing</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-bold mb-4">Technical Committee</h3>
-              <div className="bg-muted p-6 rounded-lg">
-                <div className="font-semibold mb-2">Chair:</div>
-                <p>Coordinator of Supercomputer Center, Kathmandu University</p>
-                <div className="font-semibold mt-4 mb-2">Members:</div>
-                <p>Technical representatives appointed by member institutions</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>

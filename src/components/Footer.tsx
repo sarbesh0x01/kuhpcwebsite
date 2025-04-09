@@ -11,19 +11,7 @@ const Footer = () => {
             <p className="mb-4 text-muted-foreground">
               Dedicated to bringing knowledge and technology to the service of mankind through high-performance computing resources.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition duration-300">
-                <FiFacebook size={20} />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition duration-300">
-                <FiLinkedin size={20} />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition duration-300">
-                <FiGithub size={20} />
-              </a>
-            </div>
           </div>
-
           <div>
             <h3 className="text-xl font-bold mb-4 gradient-text">Quick Links</h3>
             <ul className="space-y-2">
