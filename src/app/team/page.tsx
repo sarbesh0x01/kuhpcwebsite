@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { teamMembers } from '@/lib/data';
-import { FiMail, FiLink, FiLinkedin, FiGithub } from 'react-icons/fi';
+import { FiMail, FiLinkedin, FiGithub } from 'react-icons/fi';
 
 export default function Team() {
   // Function to safely build links
