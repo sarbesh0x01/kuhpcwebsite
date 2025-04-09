@@ -1,0 +1,14 @@
+name : KU-HPC
+
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  deploy:
+    runs-os:ubuntu-lastes
+  container:
+  
