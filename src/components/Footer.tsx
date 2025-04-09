@@ -49,14 +49,6 @@ const Footer = () => {
                 <FiMapPin className="mr-2 text-primary" />
                 <span>Kathmandu University, Dhulikhel, Kavre, Nepal</span>
               </li>
-              <li className="flex items-center text-muted-foreground">
-                <FiPhone className="mr-2 text-primary" />
-                <span>+977 XXXXXXXXX</span>
-              </li>
-              <li className="flex items-center text-muted-foreground">
-                <FiMail className="mr-2 text-primary" />
-                <span>hpc@ku.edu.np</span>
-              </li>
             </ul>
           </div>
         </div>
