@@ -1,12 +1,6 @@
 import { FiCalendar, FiAward, FiFileText, FiServer } from 'react-icons/fi';
 
-type TimelineEvent = {
-  id: number;
-  year: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-};
+
 
 const Timeline = () => {
   // Updated timeline events with accurate information from the documents

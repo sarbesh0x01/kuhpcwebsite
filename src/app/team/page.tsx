@@ -12,7 +12,7 @@ export default function Team() {
         <div className="container mx-auto px-4 relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">Our Team</h1>
           <p className="text-xl max-w-3xl text-foreground/80">
-            Meet the dedicated professionals behind Kathmandu University's High Performance Computing initiative.
+            Meet the dedicated professionals behind Kathmandu University&apos;s High Performance Computing initiative.
           </p>
         </div>
       </div>
@@ -159,7 +159,7 @@ export default function Team() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-6 glow-text">Join Our Team</h2>
           <p className="text-xl mb-8 max-w-3xl mx-auto text-white/90">
-            We're always looking for talented individuals passionate about high-performance computing
+            We&apos;re always looking for talented individuals passionate about high-performance computing
             and advancing scientific research in Nepal.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
