@@ -1,12 +1,11 @@
-import { timelineEvents } from '@/lib/data';
-import Image from 'next/image';
-import cernPartnerImage from '../../assets/CernPartner.jpg';
+import { FiCalendar, FiAward, FiFileText, FiServer } from 'react-icons/fi';
 
 type TimelineEvent = {
   id: number;
   year: string;
   title: string;
   description: string;
+  icon: React.ReactNode;
 };
 
 const Timeline = () => {
@@ -17,28 +16,28 @@ const Timeline = () => {
       year: '2013',
       title: 'Collaboration with CERN Begins',
       description: 'The scientific collaboration between Kathmandu University and CERN began in December 2013 with Masters Class in Particle Physics.',
-      image: '/images/timeline-2013.jpg'
+      icon: <FiCalendar size={24} className="text-accent" />
     },
     {
       id: 2,
       year: '2017 (June)',
       title: 'First South Asian High Energy Physics Instrumentation Workshop',
       description: 'KU hosted the first South Asian High Energy Physics Instrumentation (SAHEPI 2017) workshop.',
-      image: '/images/timeline-2017-workshop.jpg'
+      icon: <FiAward size={24} className="text-accent" />
     },
     {
       id: 3,
       year: '2017',
       title: 'International Cooperation Agreement',
       description: 'The government of Nepal and CERN signed an International Cooperation Agreement, formalizing their relationship.',
-      image: '/images/timeline-2017-agreement.jpg'
+      icon: <FiFileText size={24} className="text-accent" />
     },
     {
       id: 4,
       year: '2018 (June 28)',
-      title: 'CERN Server Donation Ceremony',
+      title: 'CERN Server Donation',
       description: 'A ceremony at CERN marked the donation of 200 servers, twelve network switches and cables to Kathmandu University.',
-      image: '/images/timeline-2018-donation.jpg'
+      icon: <FiServer size={24} className="text-accent" />
     }
   ];
 
@@ -64,20 +63,94 @@ const Timeline = () => {
             <div className="md:w-1/2 p-4">
               <div className={`modern-card bg-card p-6 rounded-xl ${index % 2 === 0 ? 'md:mr-10' : 'md:ml-10'
                 }`}>
-                <div className="mb-4 relative h-40 w-full rounded-lg overflow-hidden">
-                  <Image
-                    src={event.image}
-                    alt={event.title}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
-                    <span className="p-2 text-white/90 text-sm">{event.title}, {event.year}</span>
+                <div className="mb-4 bg-muted/50 rounded-lg p-4 flex items-center">
+                  <div className="bg-primary/10 p-2 rounded-full mr-3">
+                    {event.icon}
+                  </div>
+                  <div>
+                    <span className="text-sm text-accent font-semibold block">{event.year}</span>
+                    <span className="text-lg font-bold">{event.title}</span>
                   </div>
                 </div>
-                <span className="text-sm text-accent font-semibold mb-1 block">{event.year}</span>
-                <h3 className="text-xl font-bold mb-3">{event.title}</h3>
                 <p className="text-card-foreground/80">{event.description}</p>
+
+                {/* Event-specific visualizations */}
+                {event.id === 1 && (
+                  <div className="mt-4 p-2 border border-muted rounded-md flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center mr-2">
+                        <span className="text-xs font-bold">KU</span>
+                      </div>
+                      <span className="text-sm">Kathmandu University</span>
+                    </div>
+                    <div className="text-accent">↔</div>
+                    <div className="flex items-center">
+                      <span className="text-sm">CERN</span>
+                      <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center ml-2">
+                        <span className="text-xs font-bold">C</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {event.id === 2 && (
+                  <div className="mt-4 p-2 border border-muted rounded-md">
+                    <div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">Workshop Participants</div>
+                    <div className="flex justify-around">
+                      <div className="text-center">
+                        <div className="w-4 h-4 bg-primary/20 rounded-full mx-auto"></div>
+                        <span className="text-xs">Nepal</span>
+                      </div>
+                      <div className="text-center">
+                        <div className="w-4 h-4 bg-primary/40 rounded-full mx-auto"></div>
+                        <span className="text-xs">India</span>
+                      </div>
+                      <div className="text-center">
+                        <div className="w-4 h-4 bg-primary/60 rounded-full mx-auto"></div>
+                        <span className="text-xs">Pakistan</span>
+                      </div>
+                      <div className="text-center">
+                        <div className="w-4 h-4 bg-primary/80 rounded-full mx-auto"></div>
+                        <span className="text-xs">Bangladesh</span>
+                      </div>
+                      <div className="text-center">
+                        <div className="w-4 h-4 bg-primary rounded-full mx-auto"></div>
+                        <span className="text-xs">CERN</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {event.id === 3 && (
+                  <div className="mt-4 p-2 border border-muted rounded-md flex items-center justify-center">
+                    <div className="p-2 border-2 border-primary/30 rounded flex items-center">
+                      <svg width="24" height="24" viewBox="0 0 24 24" className="mr-2">
+                        <path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-11v6h2v-6h-2zm0-4v2h2V7h-2z" opacity="0.7" />
+                      </svg>
+                      <span className="text-sm">International Cooperation Agreement Signed</span>
+                    </div>
+                  </div>
+                )}
+
+                {event.id === 4 && (
+                  <div className="mt-4 p-2 border border-muted rounded-md">
+                    <div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">Server Donation Details</div>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="bg-primary/10 p-1 rounded text-center">
+                        <span className="text-xs font-semibold block">184</span>
+                        <span className="text-xs">CPU Servers</span>
+                      </div>
+                      <div className="bg-primary/10 p-1 rounded text-center">
+                        <span className="text-xs font-semibold block">16</span>
+                        <span className="text-xs">Disk Servers</span>
+                      </div>
+                      <div className="bg-primary/10 p-1 rounded text-center">
+                        <span className="text-xs font-semibold block">12</span>
+                        <span className="text-xs">Switches</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
