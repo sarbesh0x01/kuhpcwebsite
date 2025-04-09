@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FiMapPin, FiPhone, FiMail, FiGithub, FiLinkedin, FiFacebook } from 'react-icons/fi';
+import { FiMapPin, FiGithub, FiLinkedin, FiFacebook } from 'react-icons/fi';
 
 const Footer = () => {
   return (
