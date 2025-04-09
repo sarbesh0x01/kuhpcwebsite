@@ -12,7 +12,7 @@ export default function About() {
         <div className="container mx-auto px-4 relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">About Our HPC Center</h1>
           <p className="text-xl max-w-3xl text-foreground/80">
-            Discover the story behind Kathmandu University's High Performance Computing initiative
+            Discover the story behind Kathmandu University&apos;s High Performance Computing initiative
             and our mission to advance scientific research in Nepal.
           </p>
         </div>
@@ -25,7 +25,7 @@ export default function About() {
             <div className="modern-card bg-card p-8 rounded-xl">
               <h2 className="text-3xl font-bold mb-6 gradient-text">Our Mission</h2>
               <p className="text-foreground/90 mb-4">
-                The mission statement of Kathmandu University is "to provide quality education for leadership." Our HPC center extends this mission by providing cutting-edge computing resources that enable advanced research and education in various scientific fields.
+                The mission statement of Kathmandu University is &quot;to provide quality education for leadership.&quot; Our HPC center extends this mission by providing cutting-edge computing resources that enable advanced research and education in various scientific fields.
               </p>
               <p className="text-foreground/90">
                 We aim to create a sustainable research environment that promotes both applied science and technology in the Nepalese context, as well as fundamental science with cost sharing among partner institutions.
@@ -34,7 +34,7 @@ export default function About() {
             <div className="modern-card bg-card p-8 rounded-xl">
               <h2 className="text-3xl font-bold mb-6 gradient-text">Our Vision</h2>
               <p className="text-foreground/90 mb-4">
-                The vision of Kathmandu University is "to become a world-class university devoted to bringing knowledge and technology to the service of mankind." Our HPC center contributes to this vision by:
+                The vision of Kathmandu University is &quot;to become a world-class university devoted to bringing knowledge and technology to the service of mankind.&quot; Our HPC center contributes to this vision by:
               </p>
               <ul className="space-y-3 text-foreground/90">
                 <li className="flex items-start">
@@ -171,7 +171,7 @@ export default function About() {
               </div>
               <h3 className="text-2xl font-bold mb-4">Outreach</h3>
               <p className="text-foreground/80 mb-4">
-                Developing a data awareness and high throughput computing culture throughout Nepal's academic and research institutions.
+                Developing a data awareness and high throughput computing culture throughout Nepal&apos;s academic and research institutions.
               </p>
               <p className="text-foreground/80">
                 Creating networks of researchers who can collaborate on computationally intensive projects across different domains.

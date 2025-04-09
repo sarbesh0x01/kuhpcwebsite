@@ -1,8 +1,7 @@
 import Hero from '@/components/Hero';
-import StatCard from '@/components/StatCard';
 import AchievementCard from '@/components/AchievementCard';
 import Timeline from '@/components/Timeline';
-import { stats, achievements } from '@/lib/data';
+import { achievements } from '@/lib/data';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiCpu, FiServer, FiDatabase } from 'react-icons/fi';
