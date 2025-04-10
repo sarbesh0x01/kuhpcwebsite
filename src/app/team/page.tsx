@@ -6,7 +6,8 @@ import { FiMail, FiLinkedin, FiGithub } from 'react-icons/fi';
 
 export default function Team() {
   // Function to safely build links
-  const buildLink = (url, type) => {
+  // Fix for the buildLink function
+  const buildLink = (url: string, type: string) => {
     if (!url) return "#";
 
     if (type === 'email') {
@@ -20,15 +21,13 @@ export default function Team() {
     }
   };
 
-  // Utility function to get proper image path with fallback
-  const getImagePath = (imagePath) => {
+  // Fix for the getImagePath function
+  const getImagePath = (imagePath: string) => {
     if (!imagePath) return '/placeholder-profile.jpg';
 
     // Return the path since we're now using the public directory
     return imagePath;
-  };
-
-  return (
+  }; return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <div className="relative py-24 overflow-hidden">
@@ -75,17 +74,7 @@ export default function Team() {
                     {supervisor.description}
                   </p>
                   <div className="flex space-x-4">
-                    {supervisor.email && (
-                      <a
-                        href={buildLink(supervisor.email, 'email')}
-                        className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <FiMail size={20} />
-                      </a>
-                    )}
+
                     {supervisor.linkedin && (
                       <a
                         href={buildLink(supervisor.linkedin, 'linkedin')}

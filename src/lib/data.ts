@@ -70,42 +70,42 @@ export const teamMembers = {
       name: 'Rajendra Adhikari',
       position: 'Assistant Professor, Department of Physics',
       role: 'Project Supervisor & Coordinator',
-      description: 'Leading the HPC initiative at Kathmandu University and coordinator of the Supercomputer Center. Dr. Adhikari has been instrumental in establishing the partnership with CERN and developing the high-performance computing infrastructure.',
+      description: 'Mentoring the HPC initiative at Kathmandu University and coordinator of the Supercomputer Center. Dr. Adhikari has been instrumental in establishing the partnership with CERN and developing the high-performance computing infrastructure.',
       email: 'rajendra.adhikari@ku.edu.np',
       linkedin: 'https://www.linkedin.com/in/rajendra-a-ba35982/',
       github: 'https://github.com/rpadhikari',
       image: '/rajendrasir.jpg'
     },
-    {
-      id: 2,
-      name: 'Vice Chancellor',
-      position: 'Vice Chancellor, Kathmandu University',
-      role: 'Project Supervisor & Chair of Advisory Committee',
-      description: 'Providing institutional leadership and guidance for the HPC initiative as chair of the NUSI Advisory Committee.',
-      email: 'vc@ku.edu.np',
-      linkedin: '#',
-      website: '#',
-      image: '/images/team/vice-chancellor.jpg'
-    }
+    /*  {
+        id: 2,
+        name: '',
+        position: 'Vice Chancellor, Kathmandu University',
+        role: 'Project Supervisor & Chair of Advisory Committee',
+        description: 'Providing institutional leadership and guidance for the HPC initiative as chair of the NUSI Advisory Committee.',
+        email: 'vc@ku.edu.np',
+        linkedin: '#',
+        website: '#',
+        image: '/images/team/vice-chancellor.jpg'
+      } */
   ],
 
   // Technical Overseer (mid-level leadership)
   overseer: {
-    id: 3,
+    id: 2,
     name: 'James Bhattrai',
-    position: 'Technical Director, HPC Center',
+    position: 'Technical Lead',
     role: 'Project/Technical Overseer',
     description: 'Overseeing the technical operations of the Supercomputer Center and coordinating implementation of high-performance computing solutions across the university.',
-    email: 'technical.director@ku.edu.np',
-    linkedin: '#',
-    github: '#',
-    image: '/images/team/technical-director.jpg'
+    email: 'hello@jamesbhattarai.com',
+    linkedin: 'https://www.linkedin.com/in/jamesbhattarai/',
+    github: '/jamesii-b',
+    image: '/james.jpg'
   },
 
   // Technical Members (operational team)
   members: [
     {
-      id: 4,
+      id: 3,
       name: 'Sarbesh K.C.',
       position: 'Team Member',
       role: 'Technical Member',
@@ -114,7 +114,7 @@ export const teamMembers = {
       image: '/sarbeshkc.jpg'
     },
     {
-      id: 5,
+      id: 4,
       name: 'Aaditya Yadav',
       position: 'Team Member',
       role: 'Technical Member',
@@ -123,7 +123,7 @@ export const teamMembers = {
       image: '/Aaditya_team_member.jpg'
     },
     {
-      id: 6,
+      id: 5,
       name: 'Shriharsh Sharma Acharya',
       position: 'Team Member',
       role: 'Technical Member',
@@ -132,45 +132,26 @@ export const teamMembers = {
       image: '/shrishars.png'
     },
     {
+      id: 6,
+      name: 'Rajat Dahal',
+      position: 'Team Member',
+      role: 'Technical Member',
+      description: 'Managing the day-to-day operations of the HPC infrastructure, including hardware maintenance, system updates, and performance optimization.',
+      email: 'tazzarazzat@gmail.com',
+      github: 'https://github.com/razzat008',
+      image: '/rajat.jpg'
+    },
+    {
       id: 7,
-      name: 'Software Developer',
-      position: 'HPC Applications Developer',
+      name: 'Suvesh Gurung',
+      position: 'Team Member',
       role: 'Technical Member',
-      description: 'Creating and maintaining software tools that enable researchers to effectively utilize the supercomputing resources.',
-      email: 'developer@ku.edu.np',
-      github: '#',
-      image: '/images/team/team-member-4.jpg'
+      description: 'Managing the day-to-day operations of the HPC infrastructure, including hardware maintenance, system updates, and performance optimization.',
+      email: 'suveshgurung2@gmail.com',
+      github: 'https://github.com/suveshgurung',
+      image: '/pp.jpg'
     },
-    {
-      id: 8,
-      name: 'Technical Support Specialist',
-      position: 'User Support Coordinator',
-      role: 'Technical Member',
-      description: 'Providing training and support to researchers and students using the HPC facilities.',
-      email: 'support@ku.edu.np',
-      github: '#',
-      image: '/images/team/team-member-5.jpg'
-    },
-    {
-      id: 9,
-      name: 'Network Engineer',
-      position: 'Network Infrastructure Specialist',
-      role: 'Technical Member',
-      description: 'Managing the high-speed network infrastructure that connects the supercomputing resources.',
-      email: 'network@ku.edu.np',
-      github: '#',
-      image: '/images/team/team-member-6.jpg'
-    },
-    {
-      id: 10,
-      name: 'Research Assistant',
-      position: 'Graduate Research Assistant',
-      role: 'Technical Member',
-      description: 'Supporting research projects and helping implement computational workflows on the HPC system.',
-      email: 'research.assistant@ku.edu.np',
-      github: '#',
-      image: '/sarbeshkc.jpg'
-    }
+
   ]
 };
 

@@ -72,7 +72,7 @@ export default function About() {
             <div className="md:w-1/2">
               <div className="relative h-96 w-full rounded-xl overflow-hidden shadow-lg modern-card">
                 <Image
-                  src="/images/cern-donation.jpg"
+                  src="/CernPartner.jpg"
                   alt="CERN Server Donation"
                   fill
                   className="object-cover"
