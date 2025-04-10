@@ -129,7 +129,7 @@ export const teamMembers = {
       role: 'Technical Member',
       description: 'Managing the day-to-day operations of the HPC infrastructure, including hardware maintenance, system updates, and performance optimization.',
       github: 'https://github.com/shri-acha',
-      image: '/shrishars.png'
+      image: '/shrisars.png'
     },
     {
       id: 6,
