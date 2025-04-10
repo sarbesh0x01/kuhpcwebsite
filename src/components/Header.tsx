@@ -23,6 +23,7 @@ const Header = () => {
                 alt="Kathmandu University Logo"
                 fill
                 className="object-contain"
+                sizes="(max-width: 768px) 200px, 150px"
               />
             </div>
             <span className="font-bold text-xl gradient-text">HPC Kathmandu University</span>

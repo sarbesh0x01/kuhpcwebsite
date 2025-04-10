@@ -85,7 +85,7 @@ export const teamMembers = {
       email: 'sameer.tamrakar@ku.edu.np',
       linked: '#',
       website: '#',
-      image: '/sameer-tamrakar.jpg'
+      image: '/sameer-tamrakar.png'
     }
   ],
 
