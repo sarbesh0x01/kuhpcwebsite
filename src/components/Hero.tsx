@@ -21,9 +21,29 @@ interface ParticleType {
 const Hero = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  // Add state to control client-side only rendering
+  const [isMounted, setIsMounted] = useState(false);
+  // Store data packet styles in state
+  const [dataPackets, setDataPackets] = useState<React.CSSProperties[]>([]);
 
-  // Data flow animation
+  // Handle client-side mounting
   useEffect(() => {
+    setIsMounted(true);
+    // Generate random styles for data packets only on the client
+    const newPackets = Array(10).fill(0).map(() => ({
+      ['--start-pos' as string]: `${20 + Math.random() * 60}%`,
+      ['--end-pos' as string]: `${20 + Math.random() * 60}%`,
+      ['--delay' as string]: `${Math.random() * 5}s`,
+      ['--duration' as string]: `${1 + Math.random() * 2}s`,
+      ['--size' as string]: `${3 + Math.random() * 5}px`
+    } as React.CSSProperties));
+    setDataPackets(newPackets);
+  }, []);
+
+  // Data flow animation - only run when component is mounted
+  useEffect(() => {
+    if (!isMounted) return;
+
     setIsAnimating(true);
 
     if (canvasRef.current) {
@@ -116,6 +136,8 @@ const Hero = () => {
         }
       }
 
+      let animationFrameId: number;
+
       function animate() {
         if (!isAnimating || !canvas || !ctx) return;
 
@@ -153,7 +175,7 @@ const Hero = () => {
         }
 
         connect();
-        requestAnimationFrame(animate);
+        animationFrameId = requestAnimationFrame(animate);
       }
 
       animate();
@@ -161,9 +183,11 @@ const Hero = () => {
       return () => {
         setIsAnimating(false);
         window.removeEventListener('resize', setCanvasDimensions);
+        // Cancel animation frame to prevent memory leaks
+        cancelAnimationFrame(animationFrameId);
       };
     }
-  }, []);
+  }, [isMounted]);
 
   return (
     <div className="relative min-h-screen flex items-center overflow-hidden">
@@ -253,12 +277,14 @@ const Hero = () => {
 
               {/* Server visualization container */}
               <div className="relative h-[500px] w-full overflow-hidden rounded-xl border border-white/20 bg-black/40 backdrop-blur-sm">
-                {/* Canvas for particle animation */}
-                <canvas
-                  ref={canvasRef}
-                  className="absolute inset-0 w-full h-full"
-                  style={{ width: '100%', height: '100%' }}
-                ></canvas>
+                {/* Canvas for particle animation - only render when component is mounted */}
+                {isMounted && (
+                  <canvas
+                    ref={canvasRef}
+                    className="absolute inset-0 w-full h-full"
+                    style={{ width: '100%', height: '100%' }}
+                  ></canvas>
+                )}
 
                 {/* Status indicators */}
                 <div className="absolute top-4 left-4 bg-black/40 rounded px-2 py-1 text-xs flex items-center space-x-2">
@@ -266,22 +292,18 @@ const Hero = () => {
                   <span className="text-white/80">SYSTEM ONLINE</span>
                 </div>
 
-                {/* Data processing visualization */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none">
-                  {[...Array(10)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="data-packet"
-                      style={{
-                        ['--start-pos' as string]: `${20 + Math.random() * 60}%`,
-                        ['--end-pos' as string]: `${20 + Math.random() * 60}%`,
-                        ['--delay' as string]: `${Math.random() * 5}s`,
-                        ['--duration' as string]: `${1 + Math.random() * 2}s`,
-                        ['--size' as string]: `${3 + Math.random() * 5}px`
-                      } as React.CSSProperties}
-                    ></div>
-                  ))}
-                </div>
+                {/* Data processing visualization - only render when component is mounted */}
+                {isMounted && (
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none">
+                    {dataPackets.map((style, i) => (
+                      <div
+                        key={i}
+                        className="data-packet"
+                        style={style}
+                      ></div>
+                    ))}
+                  </div>
+                )}
 
                 {/* Bottom caption */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">

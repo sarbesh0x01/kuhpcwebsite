@@ -8,7 +8,6 @@ import {
   FiCpu, FiServer, FiDatabase, FiThermometer, FiWifi,
   FiMonitor, FiHardDrive, FiUsers
 } from 'react-icons/fi';
-import cernPartnerImage from '../../assets/CernPartner.jpg';
 
 export default function Home() {
   return (
@@ -99,7 +98,7 @@ export default function Home() {
             <div className="md:w-1/2">
               <div className="relative w-full h-80 md:h-96 rounded-xl overflow-hidden shadow-lg modern-card border border-border">
                 <Image
-                  src={cernPartnerImage}
+                  src="/CernPartner.jpg"
                   alt="CERN Server Donation"
                   fill
                   className="object-cover"
