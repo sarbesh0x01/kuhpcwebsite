@@ -139,9 +139,9 @@ export default function Team() {
                       />
                     )}
 
-                    {(supervisor.linkedin || supervisor.linked) && (
+                    {(supervisor.linkedin || supervisor.linkedin) && (
                       <SocialLink
-                        href={buildLink(supervisor.linkedin || supervisor.linked, 'linkedin')}
+                        href={buildLink(supervisor.linkedin || supervisor.linkedin, 'linkedin')}
                         icon={<FiLinkedin size={20} />}
                         label={`LinkedIn profile for ${supervisor.name}`}
                       />
