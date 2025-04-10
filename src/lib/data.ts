@@ -69,24 +69,24 @@ export const teamMembers = {
       id: 1,
       name: 'Rajendra Adhikari',
       position: 'Assistant Professor, Department of Physics',
-      role: 'Project Supervisor & Coordinator',
+      role: 'Project Supervisor',
       description: 'Mentoring the HPC initiative at Kathmandu University and coordinator of the Supercomputer Center. Dr. Adhikari has been instrumental in establishing the partnership with CERN and developing the high-performance computing infrastructure.',
       email: 'rajendra.adhikari@ku.edu.np',
       linkedin: 'https://www.linkedin.com/in/rajendra-a-ba35982/',
       github: 'https://github.com/rpadhikari',
       image: '/rajendrasir.jpg'
     },
-    /*  {
-        id: 2,
-        name: '',
-        position: 'Vice Chancellor, Kathmandu University',
-        role: 'Project Supervisor & Chair of Advisory Committee',
-        description: 'Providing institutional leadership and guidance for the HPC initiative as chair of the NUSI Advisory Committee.',
-        email: 'vc@ku.edu.np',
-        linkedin: '#',
-        website: '#',
-        image: '/images/team/vice-chancellor.jpg'
-      } */
+    {
+      id: 2,
+      name: 'Sameer Tamrakar',
+      position: 'Assistant Professors , Department of Computer Science and Engineering',
+      role: 'Project Supervisor',
+      description: 'Supervising the HPC initiative as a faculty advisor, providing guidance and mentorship throughout the project.',
+      email: 'sameer.tamrakar@ku.edu.np',
+      linked: '#',
+      website: '#',
+      image: '/sameer-tamrakar.jpg'
+    }
   ],
 
   // Technical Overseer (mid-level leadership)

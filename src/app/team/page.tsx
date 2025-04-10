@@ -1,5 +1,4 @@
-"use client";
-
+'use client';
 import Image from 'next/image';
 import { teamMembers } from '@/lib/data';
 import { FiMail, FiLinkedin, FiGithub } from 'react-icons/fi';
@@ -21,13 +20,71 @@ export default function Team() {
     }
   };
 
-  // Fix for the getImagePath function
+  // Modified getImagePath function - now only returns the path if it exists
   const getImagePath = (imagePath: string) => {
-    if (!imagePath) return '/placeholder-profile.jpg';
+    return imagePath || null;
+  };
 
-    // Return the path since we're now using the public directory
-    return imagePath;
-  }; return (
+  // Function to create a social link component
+  const SocialLink = ({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
+    <a
+      href={href}
+      className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+    >
+      {icon}
+    </a>
+  );
+
+  // Define interface for team members
+  interface TeamMember {
+    id: number;
+    image?: string;
+    name: string;
+    role: string;
+    position: string;
+    description: string;
+    email?: string;
+    linkedin?: string;
+    github?: string;
+    linked?: string;  // For handling typo in data
+    website?: string; // For additional property in data
+  }
+
+  // Function to render either an image or a name placeholder
+  const renderImageOrName = (person: TeamMember, height = "h-[400px]") => {
+    if (person.image) {
+      return (
+        <div className={`relative ${height} w-full modern-card overflow-hidden`}>
+          <Image
+            src={person.image}
+            alt={person.name}
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+            <div className="p-6">
+              <span className="text-white/70">{person.role}</span>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      // Return a styled div with the person's name as placeholder
+      return (
+        <div className={`${height} w-full modern-card overflow-hidden bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center`}>
+          <div className="text-center p-6">
+            <div className="text-2xl font-bold text-primary mb-2">{person.name}</div>
+            <div className="text-foreground/70">{person.role}</div>
+          </div>
+        </div>
+      );
+    }
+  };
+
+  return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <div className="relative py-24 overflow-hidden">
@@ -53,19 +110,7 @@ export default function Team() {
             {teamMembers.supervisors.map((supervisor) => (
               <div key={supervisor.id} className="flex flex-col items-center md:items-start gap-12">
                 <div className="w-full max-w-md mx-auto">
-                  <div className="relative h-[400px] w-full modern-card overflow-hidden">
-                    <Image
-                      src={getImagePath(supervisor.image)}
-                      alt={supervisor.name}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
-                      <div className="p-6">
-                        <span className="text-white/70">{supervisor.role}</span>
-                      </div>
-                    </div>
-                  </div>
+                  {renderImageOrName(supervisor)}
                 </div>
                 <div className="w-full max-w-md mx-auto">
                   <h2 className="text-3xl font-bold mb-2">{supervisor.name}</h2>
@@ -74,28 +119,27 @@ export default function Team() {
                     {supervisor.description}
                   </p>
                   <div className="flex space-x-4">
+                    {supervisor.email && (
+                      <SocialLink
+                        href={buildLink(supervisor.email, 'email')}
+                        icon={<FiMail size={20} />}
+                        label={`Email ${supervisor.name}`}
+                      />
+                    )}
 
                     {supervisor.linkedin && (
-                      <a
+                      <SocialLink
                         href={buildLink(supervisor.linkedin, 'linkedin')}
-                        className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <FiLinkedin size={20} />
-                      </a>
+                        icon={<FiLinkedin size={20} />}
+                        label={`LinkedIn profile for ${supervisor.name}`}
+                      />
                     )}
                     {supervisor.github && (
-                      <a
+                      <SocialLink
                         href={buildLink(supervisor.github, 'github')}
-                        className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <FiGithub size={20} />
-                      </a>
+                        icon={<FiGithub size={20} />}
+                        label={`GitHub profile for ${supervisor.name}`}
+                      />
                     )}
                   </div>
                 </div>
@@ -116,19 +160,7 @@ export default function Team() {
 
           <div className="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
             <div className="md:w-1/2">
-              <div className="relative h-[400px] w-full modern-card overflow-hidden">
-                <Image
-                  src={getImagePath(teamMembers.overseer.image)}
-                  alt={teamMembers.overseer.name}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
-                  <div className="p-6">
-                    <span className="text-white/70">{teamMembers.overseer.role}</span>
-                  </div>
-                </div>
-              </div>
+              {renderImageOrName(teamMembers.overseer)}
             </div>
             <div className="md:w-1/2">
               <h2 className="text-3xl font-bold mb-2">{teamMembers.overseer.name}</h2>
@@ -138,37 +170,25 @@ export default function Team() {
               </p>
               <div className="flex space-x-4">
                 {teamMembers.overseer.email && (
-                  <a
+                  <SocialLink
                     href={buildLink(teamMembers.overseer.email, 'email')}
-                    className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <FiMail size={20} />
-                  </a>
+                    icon={<FiMail size={20} />}
+                    label={`Email ${teamMembers.overseer.name}`}
+                  />
                 )}
                 {teamMembers.overseer.linkedin && (
-                  <a
+                  <SocialLink
                     href={buildLink(teamMembers.overseer.linkedin, 'linkedin')}
-                    className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <FiLinkedin size={20} />
-                  </a>
+                    icon={<FiLinkedin size={20} />}
+                    label={`LinkedIn profile for ${teamMembers.overseer.name}`}
+                  />
                 )}
                 {teamMembers.overseer.github && (
-                  <a
+                  <SocialLink
                     href={buildLink(teamMembers.overseer.github, 'github')}
-                    className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <FiGithub size={20} />
-                  </a>
+                    icon={<FiGithub size={20} />}
+                    label={`GitHub profile for ${teamMembers.overseer.name}`}
+                  />
                 )}
               </div>
             </div>
@@ -187,15 +207,21 @@ export default function Team() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {teamMembers.members.map((member) => (
               <div key={member.id} className="modern-card bg-card overflow-hidden relative">
-                <div className="relative h-64 w-full">
-                  <Image
-                    src={getImagePath(member.image)}
-                    alt={member.name}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
+                {member.image ? (
+                  <div className="relative h-64 w-full">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  </div>
+                ) : (
+                  <div className="h-64 w-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
+                    <div className="text-2xl font-bold text-primary">{member.name}</div>
+                  </div>
+                )}
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-1">{member.name}</h3>
                   <p className="text-primary font-medium mb-4">{member.position}</p>
@@ -203,15 +229,11 @@ export default function Team() {
 
                   <div className="flex space-x-4 z-10 relative">
                     {member.github && (
-                      <a
+                      <SocialLink
                         href={buildLink(member.github, 'github')}
-                        className="bg-muted p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <FiGithub size={18} />
-                      </a>
+                        icon={<FiGithub size={18} />}
+                        label={`GitHub profile for ${member.name}`}
+                      />
                     )}
                   </div>
                 </div>
