@@ -9,6 +9,9 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'HPC Kathmandu University',
   description: 'High Performance Computing facility at Kathmandu University',
+  icons: {
+    icon: '/logo.png'
+  }
 };
 
 export default function RootLayout({

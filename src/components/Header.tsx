@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiMenu, FiX } from 'react-icons/fi';
-import logoku from "../../assets/logoku.jpg"
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,7 +19,7 @@ const Header = () => {
           <Link href="/" className="flex items-center space-x-3">
             <div className="relative w-10 h-10">
               <Image
-                src={logoku}
+                src="/logo.png"
                 alt="Kathmandu University Logo"
                 fill
                 className="object-contain"
