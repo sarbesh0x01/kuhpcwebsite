@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import { achievements, stats } from '@/lib/data';
+import Image from 'next/image';
 import { FiCheck, FiTrendingUp, FiAward, FiUsers } from 'react-icons/fi';
 
 export default function Achievements() {
@@ -124,7 +124,7 @@ export default function Achievements() {
             <div className="modern-card bg-card p-8 rounded-xl">
               <h3 className="text-xl font-bold mb-4">Climate Research</h3>
               <p className="text-foreground/80 mb-4">
-                The HPC facility has enabled sophisticated climate modeling specific to Nepal's diverse topography,
+                The HPC facility has enabled sophisticated climate modeling specific to Nepal&apos;s diverse topography,
                 allowing for better prediction and management of weather patterns and natural disasters.
               </p>
               <div className="bg-muted p-4 rounded-lg">
@@ -153,7 +153,7 @@ export default function Achievements() {
               </p>
               <div className="bg-muted p-4 rounded-lg">
                 <span className="font-semibold block mb-1">Key Impact:</span>
-                <span className="text-foreground/80">Innovation in engineering solutions specific to Nepal's infrastructure needs.</span>
+                <span className="text-foreground/80">Innovation in engineering solutions specific to Nepal&apos;s infrastructure needs.</span>
               </div>
             </div>
 
@@ -192,7 +192,7 @@ export default function Achievements() {
               </div>
               <div className="bg-muted p-6 rounded-lg text-center">
                 <div className="text-4xl font-bold text-primary mb-2">28</div>
-                <div className="text-muted-foreground">Master's Theses</div>
+                <div className="text-muted-foreground">Master&apos;s Theses</div>
               </div>
             </div>
 
@@ -240,7 +240,7 @@ export default function Achievements() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-8 glow-text">Looking Forward</h2>
           <p className="text-xl mb-12 max-w-3xl mx-auto text-white/90">
-            Building on our achievements, we're working toward even more ambitious goals
+            Building on our achievements, we&apos;re working toward even more ambitious goals
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
