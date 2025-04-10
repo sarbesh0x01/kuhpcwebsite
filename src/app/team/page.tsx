@@ -46,15 +46,16 @@ export default function Team() {
   };
 
   // Function to render either an image or a letter avatar
-  const renderImageOrName = (person: TeamMember, height = "h-[400px]") => {
+  // We use aspect ratio instead of fixed height for better responsiveness
+  const renderImageOrName = (person: TeamMember, aspectRatio = "aspect-[3/4]") => {
     if (person.image) {
       return (
-        <div className={`relative ${height} w-full modern-card overflow-hidden`}>
+        <div className={`relative ${aspectRatio} w-full modern-card overflow-hidden`}>
           <Image
             src={person.image}
             alt={person.name}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 33vw"
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
@@ -69,7 +70,7 @@ export default function Team() {
       const initials = getInitials(person.name);
 
       return (
-        <div className={`${height} w-full modern-card overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center relative`}>
+        <div className={`${aspectRatio} w-full modern-card overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center relative`}>
           <div className="rounded-full bg-primary w-3/5 h-3/5 flex items-center justify-center shadow-lg">
             <div className="text-5xl font-bold text-white">
               {initials}
@@ -139,9 +140,9 @@ export default function Team() {
                       />
                     )}
 
-                    {(supervisor.linkedin || supervisor.linkedin) && (
+                    {(supervisor.linkedin) && (
                       <SocialLink
-                        href={buildLink(supervisor.linkedin || supervisor.linkedin, 'linkedin')}
+                        href={buildLink(supervisor.linkedin, 'linkedin')}
                         icon={<FiLinkedin size={20} />}
                         label={`LinkedIn profile for ${supervisor.name}`}
                       />
@@ -160,6 +161,8 @@ export default function Team() {
           </div>
         </div>
       </section>
+
+      {/* Technical Overseer Section - Fixed for mobile rendering */}
       <section className="py-20 relative">
         <div className="tech-dots absolute inset-0 -z-0"></div>
         <div className="container mx-auto px-4 relative">
@@ -169,8 +172,9 @@ export default function Team() {
           </p>
 
           <div className="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
+            {/* Image container with explicit width for all screen sizes */}
             <div className="w-full md:w-1/2 max-w-md mx-auto">
-              {/* Mobile-responsive image container with aspect ratio */}
+              {/* Using aspect ratio instead of fixed height for better responsiveness */}
               <div className="aspect-[3/4] w-full modern-card overflow-hidden relative">
                 {teamMembers.overseer.image ? (
                   <>
@@ -202,14 +206,38 @@ export default function Team() {
                 )}
               </div>
             </div>
-            <div className="w-full md:w-1/2 max-w-lg mx-auto">
+
+            {/* Content container with explicit width for all screen sizes */}
+            <div className="w-full md:w-1/2 max-w-lg mx-auto mt-6 md:mt-0">
               <h2 className="text-3xl font-bold mb-2">{teamMembers.overseer.name}</h2>
               <p className="text-primary font-medium mb-4">{teamMembers.overseer.position}</p>
               <p className="text-foreground/90 mb-6">
                 {teamMembers.overseer.description}
               </p>
+
+              {/* Social links section - ensuring this is included */}
               <div className="flex space-x-4">
-                {/* Social links remain the same */}
+                {teamMembers.overseer.email && (
+                  <SocialLink
+                    href={buildLink(teamMembers.overseer.email, 'email')}
+                    icon={<FiMail size={20} />}
+                    label={`Email ${teamMembers.overseer.name}`}
+                  />
+                )}
+                {(teamMembers.overseer.linkedin) && (
+                  <SocialLink
+                    href={buildLink(teamMembers.overseer.linkedin, 'linkedin')}
+                    icon={<FiLinkedin size={20} />}
+                    label={`LinkedIn profile for ${teamMembers.overseer.name}`}
+                  />
+                )}
+                {teamMembers.overseer.github && (
+                  <SocialLink
+                    href={buildLink(teamMembers.overseer.github, 'github')}
+                    icon={<FiGithub size={20} />}
+                    label={`GitHub profile for ${teamMembers.overseer.name}`}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -228,18 +256,18 @@ export default function Team() {
             {teamMembers.members.map((member) => (
               <div key={member.id} className="modern-card bg-card overflow-hidden relative">
                 {member.image ? (
-                  <div className="relative h-64 w-full">
+                  <div className="relative aspect-[4/3] w-full">
                     <Image
                       src={member.image}
                       alt={member.name}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+                      sizes="(max-width: 768px) 90vw, (max-width: 1200px) 33vw, 25vw"
                       className="object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   </div>
                 ) : (
-                  <div className="h-64 w-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center relative">
+                  <div className="aspect-[4/3] w-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center relative">
                     <div className="rounded-full bg-primary w-32 h-32 flex items-center justify-center shadow-lg">
                       <div className="text-3xl font-bold text-white">
                         {getInitials(member.name)}
