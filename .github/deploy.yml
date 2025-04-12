@@ -1,14 +1,37 @@
-name : KU-HPC
-
+name: kuhpc
 
 on:
   push:
     branches:
-      - main
-
+      - production
 
 jobs:
   deploy:
-    runs-os:ubuntu-lastes
-  container:
-  
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm run build
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/kuhpcwebsite
+            git pull origin production
+            npm install
+            npm run build
+            pm2 restart kuhpc || pm2 start npm --name "kuhpc" -- start
